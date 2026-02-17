@@ -1,20 +1,20 @@
 /**
- * 🛺 Auto Rickshaw Fare Calculator - Number & Math
- *
- * Bhaiyya ji ka auto rickshaw hai. Meter se fare calculate hota hai.
- * Different math operations chahiye — round karna, min/max nikalna,
- * strings se numbers parse karna. Tu Bhaiyya ji ka meter software bana!
- *
- * Methods to explore: parseFloat(), parseInt(), .toFixed(),
- *   Math.ceil(), Math.max(), Math.min(), Math.abs()
- *
- * Functions:
- *
- *   1. parseFare(fareString)
- *      - Customer bolte hain "152.50" as string — parseFloat() se number banao
- *      - Agar result NaN hai ya fareString string nahi hai, return -1
- *      - Example: parseFare("152.50") => 152.5
- *      - Example: parseFare("abc") => -1
+   * 🛺 Auto Rickshaw Fare Calculator - Number & Math
+   *
+   * Bhaiyya ji ka auto rickshaw hai. Meter se fare calculate hota hai.
+   * Different math operations chahiye — round karna, min/max nikalna,
+   * strings se numbers parse karna. Tu Bhaiyya ji ka meter software bana!
+   *
+   * Methods to explore: parseFloat(), parseInt(), .toFixed(),
+   *   Math.ceil(), Math.max(), Math.min(), Math.abs()
+   *
+   * Functions:
+   *
+   *   1. parseFare(fareString)
+   *      - Customer bolte hain "152.50" as string — parseFloat() se number banao
+   *      - Agar result NaN hai ya fareString string nahi hai, return -1
+   *      - Example: parseFare("152.50") => 152.5
+   *      - Example: parseFare("abc") => -1
  *
  *   2. roundFare(amount, decimalPlaces)
  *      - .toFixed(decimalPlaces) se fare round karo
@@ -52,20 +52,53 @@
  */
 export function parseFare(fareString) {
   // Your code here
+  if(typeof fareString !== "string") return -1
+
+  const fare = parseFloat(fareString)
+  if(isNaN(fare)) return -1
+
+  return parseFloat(fareString)
 }
 
 export function roundFare(amount, decimalPlaces) {
   // Your code here
+  if(typeof amount !== 'number' ||
+    typeof decimalPlaces !== "number" ||
+    decimalPlaces < 0 ||
+    !Number.isInteger(decimalPlaces)
+  ) return ""
+
+  return amount.toFixed(decimalPlaces) // iska resultka type string hi aata hai 
 }
 
 export function calculateSurge(baseFare, surgeMultiplier) {
-  // Your code here
+  if(typeof baseFare !== "number"||
+    typeof surgeMultiplier !== "number"||
+    baseFare < 0 || surgeMultiplier < 0
+  ) return 0
+  return Math.ceil(baseFare*surgeMultiplier)
 }
 
 export function findCheapestAndCostliest(...fares) {
   // Your code here
+  const validFares = fares.filter((fare) => typeof fare === "number")
+
+  if(validFares.length === 0){
+    return null
+  }
+  const cheapest = Math.min(...validFares)
+  const costliest = Math.max(...validFares)
+
+  return {cheapest, costliest}
+
 }
 
 export function getDistanceDifference(from, to) {
   // Your code here
+  const start = parseInt(from)
+  const end = parseInt(to)
+
+  if(isNaN(start)|| isNaN(end))  return -1
+
+  return Math.abs(end - start)
 }
