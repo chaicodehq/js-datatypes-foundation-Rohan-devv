@@ -48,21 +48,49 @@
  *   removeLastItem(["tamatar", "pyaaz", "mirchi"])   // => "mirchi"
  */
 export function addToCart(cart, item) {
-  // Your code here
+ 
+    if(!Array.isArray(cart)) return -1
+    if(typeof item !== "string" || item === "") return cart.length
+   
+    return cart.push(item) // ye push krke new length hi return karta hai 
 }
 
 export function addUrgentItem(cart, item) {
-  // Your code here
+
+if(!Array.isArray(cart)) return []
+if(typeof item !== "string" || item === "") return cart
+
+cart.unshift(item)// ye bhi new array ki lenght return karta hai 
+return cart // yaha array return karna tha 
+
+
 }
 
 export function removeLastItem(cart) {
-  // Your code here
+  
+if(!Array.isArray(cart) || cart.length === 0) return undefined
+
+return cart.pop()
+  
 }
 
 export function isInCart(cart, item) {
-  // Your code here
+  
+if(!Array.isArray(cart) ||
+
+ typeof item !== "string"
+) return false
+return cart.includes(item)  // .includes() uses strict equality (===)
+
 }
 
 export function mergeCarts(cart1, cart2) {
-  // Your code here
+ 
+if(!Array.isArray(cart1)) {
+  cart1 = []
+}
+if(!Array.isArray(cart2)) {
+  cart2 = []
+}
+return cart1.concat(cart2)
 }

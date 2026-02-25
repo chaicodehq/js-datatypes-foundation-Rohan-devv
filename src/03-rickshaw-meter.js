@@ -68,7 +68,7 @@ export function roundFare(amount, decimalPlaces) {
     !Number.isInteger(decimalPlaces)
   ) return ""
 
-  return amount.toFixed(decimalPlaces) // iska resultka type string hi aata hai 
+  return amount.toFixed(decimalPlaces) // iska result ka type string hi aata hai 
 }
 
 export function calculateSurge(baseFare, surgeMultiplier) {

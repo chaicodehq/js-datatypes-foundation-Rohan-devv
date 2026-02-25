@@ -52,21 +52,85 @@
  *   stringToChars("Dak")                  // => ["D", "a", "k"]
  */
 export function parcelToJSON(parcel) {
-  // Your code here
+  //   parcelToJSON(parcel)
+  //  *      - JSON.stringify() se parcel object ko JSON string mein convert karo
+  //  *      - try-catch use karo (circular references ke liye)
+  //  *      - Agar parcel undefined hai ya error aaye, return ""
+  //  *      - Example: parcelToJSON({id:"P001", weight:2.5})
+  //  *                 => '{"id":"P001","weight":2.5}'
+  if (parcel === undefined) return "";
+  try {
+    return JSON.stringify(parcel);
+  } catch (error) {
+    return "";
+  }
 }
 
 export function jsonToParcel(jsonString) {
-  // Your code here
+//   jsonToParcel(jsonString)
+//  *      - JSON.parse() se JSON string ko wapas object mein convert karo
+//  *      - try-catch use karo (invalid JSON ke liye)
+//  *      - Agar jsonString string nahi hai ya invalid JSON hai, return null
+//  *      - Example: jsonToParcel('{"id":"P001","weight":2.5}')
+//  *                 => {id:"P001", weight:2.5}
+//  *
+
+    if(typeof jsonString !== "string" || jsonString === "") return null
+    try{
+      return JSON.parse(jsonString)
+    }catch(error){
+      return null
+    }
 }
 
 export function convertToString(value) {
-  // Your code here
+//   convertToString(value)
+//  *      - String() se kisi bhi value ko string mein convert karo
+//  *      - Example: convertToString(42) => "42"
+//  *      - Example: convertToString(true) => "true"
+//  *      - Example: convertToString(null) => "null" null.toString()       // 💥 Error
+
+//  *      - Example: convertToString(undefined) => "undefined"  undefined.toString()  // 💥 Error
+     
+    return String(value)
+
 }
 
 export function convertToNumber(value) {
-  // Your code here
+//   convertToNumber(value)
+//  *      - Number() se value ko number mein convert karo
+//  *      - Agar result NaN hai, toh NaN hi return karo (caller handle karega)
+//  *      - Example: convertToNumber("42.5") => 42.5
+//  *      - Example: convertToNumber(true) => 1
+//  *      - Example: convertToNumber("hello") => NaN
+//  *      - Example: convertToNumber("") => 0
+    
+
+
+/*
+   isNaN() loose check karta hai (coercion karta hai)
+   Number.isNaN() strict check karta hai
+
+   isNaN("hello")        // true 😬 (string ko convert karta hai)
+   Number.isNaN("hello") // false ✅
+
+*/
+
+     
+     const num = Number(value)
+    
+     return num
 }
 
 export function stringToChars(str) {
-  // Your code here
+//   stringToChars(str)
+//  *      - Array.from() se string ko characters ki array mein convert karo
+//  *      - Agar str string nahi hai, return []
+//  *      - Example: stringToChars("Dak") => ["D", "a", "k"]
+//  *      - Example: stringToChars("") => []
+
+  if(typeof str !== "string") return []
+
+  return Array.from(str)
+
 }

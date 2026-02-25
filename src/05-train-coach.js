@@ -48,21 +48,76 @@
  *   areAllConfirmed(passengers)          // => true/false
  */
 export function findPassenger(passengers, name) {
-  // Your code here
+//   1. findPassenger(passengers, name)
+//  *      - .find() se passenger object dhundho by name (case-insensitive)
+//  *      - Agar passengers array nahi hai ya name string nahi hai, return undefined
+//  *      - Example: findPassenger([{name:"Rahul",coach:"S5",seat:42,status:"confirmed"}], "rahul")
+//  *                 => {name:"Rahul", coach:"S5", seat:42, status:"confirmed"}
+
+
+if(!Array.isArray(passengers) || typeof name !== "string") return undefined
+
+  const passengerObj =  passengers.find((passenger) =>
+  passenger.name.toLowerCase() === name.toLocaleLowerCase())
+  return passengerObj
 }
 
 export function getPassengerIndex(passengers, name) {
-  // Your code here
+//   2. getPassengerIndex(passengers, name)
+//  *      - .findIndex() se passenger ka position nikalo (case-insensitive)
+//  *      - Agar passengers array nahi hai ya name string nahi hai, return -1
+//  *      - Example: getPassengerIndex([{name:"Rahul"}, {name:"Priya"}], "Priya") => 1
+//  *
+if(!Array.isArray(passengers) || typeof name !== "string") return -1
+
+const passengerIndex = passengers.findIndex((passenger) =>
+  passenger.name.toLowerCase() === name.toLocaleLowerCase())
+ 
+return  passengerIndex
+
 }
 
 export function isAnyWaitlisted(passengers) {
-  // Your code here
+//   3. isAnyWaitlisted(passengers)
+//  *      - .some() se check karo ki koi bhi passenger "waitlisted" hai ya nahi
+//  *      - Agar passengers array nahi hai ya empty hai, return false
+//  *      - Example: isAnyWaitlisted([{status:"confirmed"}, {status:"waitlisted"}]) => true
+
+  if(!Array.isArray(passengers) || passengers.length == 0 ) return false 
+  const anyWaitListed = passengers.some((passenger) =>
+    passenger.status === "waitlisted"
+   )
+
+   return anyWaitListed
 }
 
 export function areAllConfirmed(passengers) {
-  // Your code here
+//   / areAllConfirmed(passengers)
+//  *      - .every() se check karo ki SAB passengers "confirmed" hain ya nahi
+//  *      - Agar passengers array nahi hai ya empty hai, return false
+//  *      - Example: areAllConfirmed([{status:"confirmed"}, {status:"confirmed"}]) => true
+
+if(!Array.isArray(passengers) || passengers.length == 0 ) return false 
+
+const allConfirmed = passengers.every((passenger) => 
+  passenger.status === "confirmed"
+)
+
+return allConfirmed
+
 }
 
 export function getWaitlistedPassengers(passengers) {
-  // Your code here
+//    5. getWaitlistedPassengers(passengers)
+//  *      - .filter() se sirf "waitlisted" passengers return karo
+//  *      - Agar passengers array nahi hai, return []
+//  *      - Example: getWaitlistedPassengers([{name:"A",status:"confirmed"},{name:"B",status:"waitlisted"}])
+//  *                 => [{name:"B", status:"waitlisted"}]
+
+if(!Array.isArray(passengers)) return []
+
+ const filteredPass = passengers.filter ((passenger) => 
+   passenger.status &&
+  passenger.status.toLocaleLowerCase() === "waitlisted")
+ return filteredPass
 }
